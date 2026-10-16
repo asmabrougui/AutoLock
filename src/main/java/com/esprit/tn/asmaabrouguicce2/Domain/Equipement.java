@@ -6,6 +6,7 @@ import lombok.experimental.FieldDefaults;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -22,6 +23,9 @@ public class Equipement {
     Long idEquipement;
 
     String libelle;
+    @ManyToMany(mappedBy = "equipements",fetch = FetchType.LAZY)
+    Set<Vehicule> vehicules;
+
 
 
 }

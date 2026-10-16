@@ -28,5 +28,9 @@ public class Client {
     String telephone;
     String numPermis;
     LocalDate dateInscription;
+    @OneToMany(mappedBy = "client", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    List<Reservation> reservations ;
+
+
 
 }

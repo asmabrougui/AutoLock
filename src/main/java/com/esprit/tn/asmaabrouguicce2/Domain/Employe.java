@@ -23,6 +23,8 @@ public class Employe {
 
     @Enumerated(EnumType.STRING)
     RoleEmploye role;
+    @ManyToOne(fetch = FetchType.LAZY)
+    Agence agence;
 
 
 }
