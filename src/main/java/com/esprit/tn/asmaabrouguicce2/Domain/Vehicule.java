@@ -1,5 +1,6 @@
 package com.esprit.tn.asmaabrouguicce2.Domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -31,6 +32,7 @@ public class Vehicule {
     @Enumerated(value = EnumType.STRING)
 
     private StatutVehicule statut;
+    @JsonBackReference
     @ManyToOne
     Agence agence;
     @ManyToMany

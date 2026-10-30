@@ -38,6 +38,6 @@ public class VehiculeServices implements IVehiculeService {
 
     @Override
     public List<Vehicule> getAllVehicules() {
-        return List.of();
+        return iVehiculeRepository.findAll();
     }
 }
