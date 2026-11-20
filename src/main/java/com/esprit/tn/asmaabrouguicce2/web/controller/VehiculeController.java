@@ -37,5 +37,20 @@ public class VehiculeController {
         return iVehiculeService.getAllVehicules();
 
     }
-
+    @PutMapping("/assign/{idVehicule}/{idAgence}")
+    Vehicule assignToAgence(@PathVariable Long idVehicule, @PathVariable Long idAgence) {
+        return iVehiculeService.assignToAgence(idVehicule, idAgence);
+    }
+    @PutMapping("/assign-equipement/{idVehicule}/{idEquipement}")
+    Vehicule assignToEquipements(@PathVariable Long idVehicule, @PathVariable Long idEquipement) {
+        return iVehiculeService.assignToEquipements(idVehicule, idEquipement);
+    }
+    @PutMapping("/unassign/{idVehicule}")
+    Vehicule unassignFromAgence(@PathVariable Long idVehicule) {
+        return iVehiculeService.unassignFromAgence(idVehicule);
+    }
+    @PutMapping("/unassign-equipement/{idVehicule}/{idEquipement}")
+    Vehicule unassignEquipement(@PathVariable Long idVehicule, @PathVariable Long idEquipement) {
+        return iVehiculeService.unassignEquipement(idVehicule, idEquipement);
+    }
 }

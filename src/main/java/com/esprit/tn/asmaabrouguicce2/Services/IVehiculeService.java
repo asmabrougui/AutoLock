@@ -11,4 +11,9 @@ public interface IVehiculeService {
     Vehicule getVehicule(Long id);
     void deleteVehicule(Long id);
     List<Vehicule> getAllVehicules();
+    Vehicule assignToAgence(Long idVehicule,Long idAgence);
+    Vehicule assignToEquipements(Long idVehicule,Long idEquipement);
+    Vehicule unassignFromAgence(Long idVehicule);
+    Vehicule unassignEquipement(Long idVehicule, Long idEquipement);
+
 }
