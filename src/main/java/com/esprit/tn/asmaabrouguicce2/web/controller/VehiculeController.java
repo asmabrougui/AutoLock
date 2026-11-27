@@ -2,7 +2,10 @@ package com.esprit.tn.asmaabrouguicce2.web.controller;
 
 import com.esprit.tn.asmaabrouguicce2.Domain.Vehicule;
 import com.esprit.tn.asmaabrouguicce2.Services.IVehiculeService;
+import com.esprit.tn.asmaabrouguicce2.web.dto.VehiculeDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -53,4 +56,16 @@ public class VehiculeController {
     Vehicule unassignEquipement(@PathVariable Long idVehicule, @PathVariable Long idEquipement) {
         return iVehiculeService.unassignEquipement(idVehicule, idEquipement);
     }
+    @PostMapping("/agence/{agenceId}")
+    public ResponseEntity<Vehicule> addVehiculeAndAssignToAgence(@PathVariable Long agenceId,
+                                                                 @RequestBody Vehicule vehicule) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(iVehiculeService.addVehiculeAndAssignToAgence(vehicule, agenceId));
+    }
+    @GetMapping("/dto/{idVehicule}")
+    public VehiculeDto getVehiculeDto(@PathVariable Long idVehicule) {
+        return iVehiculeService.getVehiculeDto(idVehicule);
+    }
 }
+
+

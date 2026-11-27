@@ -7,6 +7,8 @@ import com.esprit.tn.asmaabrouguicce2.Repository.IAgenceRepository;
 import com.esprit.tn.asmaabrouguicce2.Repository.IEquipementRepository;
 import com.esprit.tn.asmaabrouguicce2.Repository.IVehiculeRepository;
 import com.esprit.tn.asmaabrouguicce2.Services.IVehiculeService;
+import com.esprit.tn.asmaabrouguicce2.web.dto.VehiculeDto;
+import com.esprit.tn.asmaabrouguicce2.web.mapper.VehiculeMapper;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,8 @@ public class VehiculeServices implements IVehiculeService {
     private final IVehiculeRepository iVehiculeRepository;
     private final IAgenceRepository iAgenceRepository;
     private final IEquipementRepository iEquipementRepository;
+    private final VehiculeMapper vehiculeMapper;
+
 
     @Override
     public Vehicule addVehicule(Vehicule vehicule) {
@@ -78,6 +82,34 @@ public class VehiculeServices implements IVehiculeService {
         vehicule.getEquipements().remove(equipement);
         return iVehiculeRepository.save(vehicule);
     }
+    @Override
+    public Vehicule addVehiculeAndAssignToAgence(Vehicule vehicule, Long agenceId) {
+        Agence agence = iAgenceRepository.findById(agenceId)
+                .orElseThrow(() -> new EntityNotFoundException());
+        vehicule.setAgence(agence);
+        return iVehiculeRepository.save(vehicule);
+    }
+
+    @Override
+    public VehiculeDto getVehiculeDto(Long id) {
+        Vehicule vehicule = iVehiculeRepository.findById(id).orElseThrow(() -> new EntityNotFoundException());
+        return vehiculeMapper.toDto(vehicule);
+    }
+
+   // @Override
+    //public VehiculeDto toDto(Vehicule vehicule) {
+      //  VehiculeDto vehiculeDto = new VehiculeDto();
+        //vehiculeDto.setImmatriculation(vehicule.getImmatriculation());
+        //vehiculeDto.setMarque(vehicule.getMarque());
+        //vehiculeDto.setModele(vehicule.getModele());
+        //vehiculeDto.setTarif(vehicule.getTarifJournalier() != null
+          //      ? vehicule.getTarifJournalier().toString() : null);
+        //vehiculeDto.setNomAgence(vehicule.getAgence() != null
+          //      ? vehicule.getAgence().getNom() : null);
+        //return vehiculeDto;
+    //}
+
+
 
 
 }
